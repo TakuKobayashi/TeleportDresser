@@ -1,0 +1,40 @@
+on:
+  push:
+    branches:
+      - master
+
+name: Web Deploy
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+    - uses: actions/checkout@v2
+    - name: setup ubuntu
+      run: sudo apt-get --quiet update --yes
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: yarn install
+      working-directory: ./web
+      run: yarn install
+    - name: gatsby build and deploy
+      working-directory: ./web
+      env:
+        CI: true
+      run: |
+        yarn run build --if-present
+    - name: deploy
+      uses: peaceiris/actions-gh-pages@v3.6.1
+      env:
+        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: web/public
+    - uses: actions/upload-artifact@master
+      with:
+        name: build
+        path: web/public
