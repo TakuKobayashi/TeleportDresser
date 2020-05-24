@@ -30,7 +30,7 @@ jobs:
         yarn run build --if-present
     - name: deploy
       uses: peaceiris/actions-gh-pages@v3
-      env:
+      with:
         deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         publish_branch: gh-pages
         publish_dir: web/public
