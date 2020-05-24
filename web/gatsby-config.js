@@ -1,6 +1,7 @@
 'use strict'
 
 module.exports = {
+  pathPrefix: "/TeleportDresser",
   siteMetadata: {
     title: 'gatsby-starter-typescript-plus',
     description: 'A starter kit for TypeScript-based Gatsby projects with sensible defaults.',
