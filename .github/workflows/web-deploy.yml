@@ -19,6 +19,12 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - name: Register .env
+      working-directory: ./web
+      env:
+        API_BASE_URL: ${{ secrets.API_BASE_URL }}
+      run: |
+        echo "API_BASE_URL=${API_BASE_URL}" >> ./.env.production
     - name: yarn install
       working-directory: ./web
       run: yarn install
