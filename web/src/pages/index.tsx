@@ -8,6 +8,8 @@ import Dropzone from 'react-dropzone'
 import { Card, Pagination } from 'react-rainbow-components';
 import axios from 'axios';
 import {Button, Modal} from "react-rainbow-components/components";
+import linepay_icon from '../icons/linepay_logo.png'
+const QRCode = require('qrcode.react');
 
 interface ProductsState {
   products: any[],
@@ -73,6 +75,16 @@ class IndexPage extends React.Component<{}, ProductsState> {
             isOpen={this.state.openNumber === product.image_id}
             onRequestClose={this.handleOnClose}
         >
+          <div className="rainbow-align-content_center">
+            <a href={process.env.API_BASE_URL + '/pay?product_id=' + product.image_id}>
+              <img
+                src={linepay_icon}
+              />
+            </a>
+          </div>
+          <div>
+            <QRCode value={process.env.API_BASE_URL + '/pay?product_id=' + product.image_id} />
+          </div>
         </Modal>
       </Card>
     ));

@@ -10,11 +10,17 @@ const server = awsServerlessExpress.createServer(app);
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
+const line_pay = require("line-pay");
+
 app.use(cookieParser());
 
 app.use(cors({ origin: true }));
 
 app.get('/', (req, res) => {
+  res.json({ hello: 'world' });
+});
+
+app.get('/pay', (req, res) => {
   res.json({ hello: 'world' });
 });
 
