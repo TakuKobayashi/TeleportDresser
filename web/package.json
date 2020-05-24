@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "private": true,
   "author": "Resi Respati <resir014@gmail.com>",
-  "homepage": ".",
   "keywords": [
     "gatsby"
   ],
@@ -13,7 +12,7 @@
   "scripts": {
     "build": "gatsby build",
     "clean": "rimraf public",
-    "deploy": "npm run clean && gatsby build --prefix-paths && gh-pages -d public",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
     "dev": "gatsby develop",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
