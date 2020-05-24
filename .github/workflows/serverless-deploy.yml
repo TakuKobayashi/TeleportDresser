@@ -28,9 +28,9 @@ jobs:
         LINE_PAY_CONFIRM_URL: ${{ secrets.LINE_PAY_CONFIRM_URL }}
       run: |
         echo "FIREBASE_STORAGE_BUCKET=${FIREBASE_STORAGE_BUCKET}" >> ./.env
-        echo "LINE_PAY_CHANNEL_ID=${FIREBASE_STORAGE_BUCKET}" >> ./.env
-        echo "LINE_PAY_CHANNEL_SECRET_KEY=${FIREBASE_STORAGE_BUCKET}" >> ./.env
-        echo "LINE_PAY_CONFIRM_URL=${FIREBASE_STORAGE_BUCKET}" >> ./.env
+        echo "LINE_PAY_CHANNEL_ID=${LINE_PAY_CHANNEL_ID}" >> ./.env
+        echo "LINE_PAY_CHANNEL_SECRET_KEY=${LINE_PAY_CHANNEL_SECRET_KEY}" >> ./.env
+        echo "LINE_PAY_CONFIRM_URL=${LINE_PAY_CONFIRM_URL}" >> ./.env
     - name: Register firebaseConfig.json
       working-directory: ./server
       env:
