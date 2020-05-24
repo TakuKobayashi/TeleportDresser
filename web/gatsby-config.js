@@ -3,14 +3,14 @@
 module.exports = {
   pathPrefix: "/TeleportDresser",
   siteMetadata: {
-    title: 'gatsby-starter-typescript-plus',
+    title: 'TeleportDresser',
     description: 'A starter kit for TypeScript-based Gatsby projects with sensible defaults.',
-    keywords: 'gatsbyjs, gatsby, javascript, sample, something',
-    siteUrl: 'https://gatsby-starter-typescript-plus.netlify.com',
+    keywords: 'gatsbyjs, gatsby, javascript',
+    siteUrl: 'https://takukobayashi.github.io/TeleportDresser/',
     author: {
-      name: 'Resi Respati',
-      url: 'https://twitter.com/resir014',
-      email: 'resir014@gmail.com'
+      name: 'TakuKobayashi',
+      url: 'https://twitter.com/taptappun',
+      email: 'keep_slimbody@yahoo.co.jp'
     }
   },
   plugins: [
