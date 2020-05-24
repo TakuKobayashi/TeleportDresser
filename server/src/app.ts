@@ -5,9 +5,6 @@ import * as awsServerlessExpress from 'aws-serverless-express';
 import * as express from 'express';
 import { setupFireStore, setupFireStorage } from './common/firebase';
 
-const multer = require('multer')
-const upload = multer({ dest: 'uploads/' })
-
 const app = express();
 const server = awsServerlessExpress.createServer(app);
 const cors = require('cors');
@@ -24,14 +21,12 @@ app.get('/', (req, res) => {
 app.get('/upload', (req, res) => {
   const fireBucket = setupFireStorage().bucket();
   fireBucket.upload('./onepiece_ex01.png', { destination: 'aaa.png' }).then((file) => {
-    console.log(file.download())
     console.log(file)
   })
   res.json({ hello: 'world' });
 });
 
-app.post('/uploadFile', upload.single('file'), (req, res) => {
-  console.log(req.file)
+app.post('/uploadFile', (req, res) => {
   res.json({ hello: 'world' });
 });
 
