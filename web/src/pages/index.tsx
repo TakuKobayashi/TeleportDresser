@@ -76,14 +76,14 @@ class IndexPage extends React.Component<{}, ProductsState> {
             onRequestClose={this.handleOnClose}
         >
           <div className="rainbow-align-content_center">
-            <a href={process.env.API_BASE_URL + '/pay?product_id=' + product.image_id}>
+            <a href={process.env.API_BASE_URL + '/line/pay/reserve?product_id=' + product.image_id}>
               <img
                 src={linepay_icon}
               />
             </a>
           </div>
           <div>
-            <QRCode value={process.env.API_BASE_URL + '/pay?product_id=' + product.image_id} />
+            <QRCode value={process.env.API_BASE_URL + '/line/pay/reserve?product_id=' + product.image_id} />
           </div>
         </Modal>
       </Card>
