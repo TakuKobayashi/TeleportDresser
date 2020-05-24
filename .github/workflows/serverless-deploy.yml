@@ -23,8 +23,14 @@ jobs:
       working-directory: ./server
       env:
         FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
+        LINE_PAY_CHANNEL_ID: ${{ secrets.LINE_PAY_CHANNEL_ID }}
+        LINE_PAY_CHANNEL_SECRET_KEY: ${{ secrets.LINE_PAY_CHANNEL_SECRET_KEY }}
+        LINE_PAY_CONFIRM_URL: ${{ secrets.LINE_PAY_CONFIRM_URL }}
       run: |
         echo "FIREBASE_STORAGE_BUCKET=${FIREBASE_STORAGE_BUCKET}" >> ./.env
+        echo "LINE_PAY_CHANNEL_ID=${FIREBASE_STORAGE_BUCKET}" >> ./.env
+        echo "LINE_PAY_CHANNEL_SECRET_KEY=${FIREBASE_STORAGE_BUCKET}" >> ./.env
+        echo "LINE_PAY_CONFIRM_URL=${FIREBASE_STORAGE_BUCKET}" >> ./.env
     - name: Register firebaseConfig.json
       working-directory: ./server
       env:
