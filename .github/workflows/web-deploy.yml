@@ -22,12 +22,10 @@ jobs:
     - name: yarn install
       working-directory: ./web
       run: yarn install
-    - name: gatsby build and deploy
+    - name: gatsby build
       working-directory: ./web
-      env:
-        CI: true
       run: |
-        yarn run build --if-present
+        yarn run build
     - name: deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
