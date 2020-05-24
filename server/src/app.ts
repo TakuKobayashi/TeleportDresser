@@ -4,50 +4,21 @@ import { APIGatewayEvent, APIGatewayProxyHandler, Context } from 'aws-lambda';
 import * as awsServerlessExpress from 'aws-serverless-express';
 import * as express from 'express';
 import { setupFireStore, setupFireStorage } from './common/firebase';
-const { v4: uuid } = require('uuid');
+import { linePayRouter } from './routes/line/pay';
 
 const app = express();
 const server = awsServerlessExpress.createServer(app);
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
-const line_pay = require("line-pay");
-const pay = new line_pay({
-  channelId: process.env.LINE_PAY_CHANNEL_ID,
-  channelSecret: process.env.LINE_PAY_CHANNEL_SECRET_KEY,
-  isSandbox: true
-})
-
 app.use(cookieParser());
 
 app.use(cors({ origin: true }));
 
+app.use('/line/pay', linePayRouter);
+
 app.get('/', (req, res) => {
   res.json({ hello: 'world' });
-});
-
-app.get('/pay', (req, res) => {
-  const options = {
-    productName: "test",
-    amount: 1000,
-    currency: "JPY",
-    orderId: uuid(),
-    confirmUrl: process.env.LINE_PAY_CONFIRM_URL,
-    confirmUrlType: "SERVER"
-  }
-
-  pay.reserve(options).then((response) => {
-    const reservation = options;
-    reservation.transactionId = response.info.transactionId;
-    console.log(response)
-    res.redirect(response.info.paymentUrl.web);
-  })
-//  res.json({ hello: 'world' });
-});
-
-app.get('/pay/confirm', (req, res) => {
-  console.log(req.query)
-  res.json(req.query);
 });
 
 app.get('/images', async (req, res) => {
