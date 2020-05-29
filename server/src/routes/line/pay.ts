@@ -24,7 +24,7 @@ linePayRouter.get('/reserve', async (req, res) => {
     currency: "JPY",
     orderId: uuid(),
     confirmUrl: process.env.LINE_PAY_CONFIRM_URL,
-    confirmUrlType: "SERVER"
+    confirmUrlType: "CLIENT"
   }
 
   const reserveResponse = await pay.reserve(options).catch((err) => {
