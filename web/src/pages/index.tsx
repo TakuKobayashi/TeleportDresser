@@ -128,17 +128,6 @@ class IndexPage extends React.Component<{}, ProductsState> {
                   <div className="rainbow-flex rainbow-justify_space-around rainbow-flex_wrap">{this.getContent()}</div>
                 </div>
               </div>
-              <Dropzone
-                onDrop={this.onFileDrop}>
-                {({getRootProps, getInputProps}) => (
-                  <section>
-                    <div {...getRootProps()}>
-                      <input {...getInputProps()} />
-                      <p>Drag 'n' drop some files here, or click to select files</p>
-                    </div>
-                  </section>
-                )}
-               </Dropzone>
             </Container>
           </Page>
         </IndexLayout>
