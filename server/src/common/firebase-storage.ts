@@ -30,12 +30,12 @@ export async function getFileList(): Promise<any[]> {
 
 async function updateOrGetFileMeta(fileMeta: any){
   const firestore = setupFireStore();
-  const productMeta = await firestore.collection("Products").doc(fileMeta.name).get()
+  const productMeta = await firestore.collection("Products").doc(fileMeta.image_id).get()
   const productMetaData = productMeta.data();
   if(productMetaData){
     return productMetaData;
   } else {
-    const result = await firestore.collection("Products").doc(fileMeta.name).set(fileMeta)
+    const result = await firestore.collection("Products").doc(fileMeta.image_id).set(fileMeta);
     return fileMeta;
   }
 }
