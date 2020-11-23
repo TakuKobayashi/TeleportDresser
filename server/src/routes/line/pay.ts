@@ -43,18 +43,14 @@ linePayRouter.get('/confirm', async (req, res) => {
   const firestore = setupFireStore();
   const purchaseLogDoc = await firestore.collection("LinePayPurchaseLogs").doc(req.query.transactionId).get()
   const purchaseLogData = purchaseLogDoc.data();
-  console.log("----------------------------------------------------------------")
-  console.log(purchaseLogData)
   const options = {
     transactionId: req.query.transactionId,
     amount: purchaseLogData.amount,
     currency: purchaseLogData.currency,
   }
-  console.log(options)
   const confirmResponse = await pay.confirm(options).catch((err) => {
     res.json(err);
   })
-  console.log(confirmResponse)
   if(confirmResponse){
     res.redirect("https://takukobayashi.github.io/TeleportDresser/")
   }
