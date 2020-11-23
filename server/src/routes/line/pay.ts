@@ -18,10 +18,15 @@ linePayRouter.get('/', (req: Request, res: Response, next: NextFunction) => {
 
 linePayRouter.get('/reserve', async (req, res) => {
   console.log(req.headers)
+  console.log(req.query.product_id)
+  const firestore = setupFireStore();
+  const productMeta = await firestore.collection("Products").doc(req.query.product_id).get()
+  const productMetaData = productMeta.data()
   const options = {
-    productName: "test",
-    amount: 1000,
-    currency: "JPY",
+    productName: productMetaData.name,
+    productImageUrl: productMetaData.image_url,
+    amount: productMetaData.price,
+    currency: productMetaData.currency,
     orderId: uuid(),
     confirmUrl: process.env.LINE_PAY_CONFIRM_URL,
     confirmUrlType: "CLIENT"
@@ -32,7 +37,6 @@ linePayRouter.get('/reserve', async (req, res) => {
   })
   const reservation = options;
   reservation.transactionId = reserveResponse.info.transactionId;
-  const firestore = setupFireStore();
   const result = await firestore.collection("LinePayPurchaseLogs").doc(reservation.transactionId).set(options)
   // LineBotからはwebではなくappを使う
   res.redirect(reserveResponse.info.paymentUrl.web);
