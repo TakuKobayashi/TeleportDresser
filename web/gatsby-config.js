@@ -56,6 +56,29 @@ module.exports = {
     'gatsby-plugin-typescript',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
-    'gatsby-plugin-react-helmet'
+    'gatsby-plugin-react-helmet',
+    {
+      resolve: "gatsby-plugin-firebase",
+      options: {
+        features: {
+          auth: true,
+          database: false,
+          firestore: false,
+          storage: false,
+          messaging: false,
+          functions: false,
+          performance: false
+        },
+        credentials: {
+          apiKey: "AIzaSyBKq3oBd-m3XVPy2CLAO2fdLvYTXHIGBjw",
+          authDomain: "teleportdresser.firebaseapp.com",
+          databaseURL: "https://teleportdresser.firebaseio.com",
+          projectId: "teleportdresser",
+          storageBucket: "teleportdresser.appspot.com",
+          messagingSenderId: "984085080699",
+          appId: "1:984085080699:web:98e2992bede1cc202d90de"
+        },
+      }
+    }
   ]
 }
