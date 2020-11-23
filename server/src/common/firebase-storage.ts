@@ -23,7 +23,7 @@ export async function getFileList(): Promise<any[]> {
   }
   const fileMetaList = await Promise.all(fileListPromises);
   for(const fileMeta of fileMetaList){
-    fileIdList[fileMeta.name] = fileMeta;
+    fileIdList[fileMeta.image_id] = fileMeta;
   }
   return Object.values(fileIdList);
 }
