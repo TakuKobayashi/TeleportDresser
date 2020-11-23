@@ -4,6 +4,7 @@ import { APIGatewayEvent, APIGatewayProxyHandler, Context } from 'aws-lambda';
 import * as awsServerlessExpress from 'aws-serverless-express';
 import * as express from 'express';
 import { setupFireStore, setupFireStorage } from './common/firebase';
+import { getFileList } from './common/firebase-storage'
 import { linePayRouter } from './routes/line/pay';
 
 const app = express();
@@ -22,24 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/images', async (req, res) => {
-  const fireStorage = setupFireStorage();
-  const fileList = [];
-  const fileBuckets = await fireStorage.bucket().getFiles();
-  for(const files of fileBuckets){
-    for(const file of files){
-      fileList.push({
-        name: file.id,
-        price: 1000,
-        currency: "JPY",
-        image_id: file.metadata.id,
-        image_url: "https://firebasestorage.googleapis.com/v0" + file.parent.baseUrl + "/" + file.parent.id + file.baseUrl + "/" + file.id + "?alt=media",
-        content_type: file.metadata.contentType,
-        file_size: file.metadata.size,
-        created_at: file.metadata.timeCreated,
-        updated_at: file.metadata.updated,
-      })
-    }
-  }
+  const fileList = await getFileList();
   res.json(fileList);
 });
 
